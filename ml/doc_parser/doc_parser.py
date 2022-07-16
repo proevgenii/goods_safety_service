@@ -61,12 +61,11 @@ class ParseDoc:
                 'Группа продукции': self.prod_grp_pred,
                 'Наличие ошибки': 0
                 }
-        #         self.json_file[]
         json_file = json.dumps(file, indent=4)
         return json_file
 
 
-#if __name__ == 'main':
-doc_parser = ParseDoc(prod_grp_pred, path)
-with open('json_file.txt', 'w') as outfile:
-    json.dump(doc_parser.create_json(), outfile)
+if __name__ == 'main':
+    doc_parser = ParseDoc(prod_grp_pred, path)
+    with open('json_file.txt', 'w') as outfile:
+        json.dump(doc_parser.create_json(), outfile)
