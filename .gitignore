@@ -127,3 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.idea
+ml/.ipynb_checkpoints
+*.ipynb
+data/
+catboost_info
