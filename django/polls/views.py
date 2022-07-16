@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import ensure_csrf_cookie
-from .forms import TestOne, TestTwo, MapOne
+from .forms import TestOne, TestTwo, MapOne, MapTwo
 from .models import OneActivity, TwoActivity
 import json
 import sys
@@ -46,9 +46,9 @@ def test_2_view(request):
             report = TwoActivity()
             report.code = form.cleaned_data["code"]
             report.common_naming = form.cleaned_data["common_naming"]
-            print(TwoActivity.get_results())
-            return render(request, 'map.html',
-                          context={'plot_div': map_view()})
+            map_two = MapTwo(TwoActivity.get_results())
+            return render(request, 'map_2.html',
+                          context={'form': map_two,'plot_div': map_view()})
         elif form.is_valid() != True:
             sys.stdout.write(json.dumps(form.errors, indent=4))
     else:

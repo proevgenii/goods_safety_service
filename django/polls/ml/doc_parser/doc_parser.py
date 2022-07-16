@@ -4,21 +4,17 @@ import json
 
 
 prod_grp_pred = 'Системы передачи извещений о пожаре'
-path = 'датасет 15072022.xlsx'
+
 default_code = '9999999'
 default_gruppa_tov_poz_tn_codes = '8516'
 default_sub_poz_code = '100000'
 
 class ParseDoc:
 
-    def __init__(self, prod_grp_pred: str, path: str):
+    def __init__(self, prod_grp_pred: str, tech_reg: dict, gruppa_and_tov_poz: dict):
         self.prod_grp_pred = prod_grp_pred
-        self.data = pd.read_excel(path, sheet_name='data', engine = 'openpyxl')
-        self.tn_search = pd.read_excel(path, sheet_name='тн вэд поиск', engine = 'openpyxl')
-        self.tn_search = self.tn_search.rename(columns={'Копия Группа продукции.1': 'Группа продукции'})
-        self.dataset = pd.read_excel(path, sheet_name='датасет', engine = 'openpyxl')
-        self.technical_regulation = self.get_technical_regulation(self.dataset)
-        self.gruppa_and_tov_poz_tn_codes = self.get_gruppa_and_tov_poz_tn_codes(self.tn_search)
+        self.technical_regulation = tech_reg
+        self.gruppa_and_tov_poz_tn_codes = gruppa_and_tov_poz
         self.sub_poz_code = self.map_sub_poz_code()
 
     def map_technical_regulation(self) -> str:
@@ -32,20 +28,6 @@ class ParseDoc:
 
     def map_sub_poz_code(self) -> str:
         return default_sub_poz_code
-
-    @staticmethod
-    def get_technical_regulation(dataset) -> dict:
-        technical_regulation = dict()
-        for k, v in dataset[['Группа продукции', 'Технические регламенты']].values:
-            technical_regulation[k] = v
-        return technical_regulation
-
-    @staticmethod
-    def get_gruppa_and_tov_poz_tn_codes(tn_search) -> dict:
-        gruppa_and_tov_poz_tn_codes = dict()
-        for k, v in tn_search[['Группа продукции', 'big Коды ТН ВЭД ЕАЭС.1.1']].values:
-            gruppa_and_tov_poz_tn_codes[k] = v
-        return gruppa_and_tov_poz_tn_codes
 
     def create_doc(self):
         pass
@@ -62,9 +44,3 @@ class ParseDoc:
                 'Наличие ошибки': 0
                 }
         return file
-
-
-if __name__ == 'main':
-    doc_parser = ParseDoc(prod_grp_pred, path)
-    with open('json_file.txt', 'w') as outfile:
-        json.dump(doc_parser.create_json(), outfile)
