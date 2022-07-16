@@ -7,6 +7,8 @@ dataset = dataset.loc[~dataset['Технические регламенты'].is
 tn_search = pd.read_excel(path, sheet_name='тн вэд поиск', engine = 'openpyxl')
 tn_search = tn_search.rename(columns={'Копия Группа продукции.1': 'Группа продукции'})
 
+dataset['Технические регламенты'].fillna('not_found', inplace= True)
+
 def get_technical_regulation(dataset) -> dict:
     technical_regulation = dict()
     for k, v in dataset[['Группа продукции', 'Технические регламенты']].values:
