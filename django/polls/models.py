@@ -3,6 +3,7 @@ import os
 import json
 
 from polls.ml.doc_parser.doc_parser import ParseDoc
+from polls.ml.group_predict import predict_baseline
 # Create your models here.
 
 PATH = os.path.dirname(__file__)
@@ -31,8 +32,9 @@ class OneActivity(models.Model):
     group_prod = models.TextField(max_length=10000)
     error = models.CharField(max_length=100)
 
-    def get_results():
-        doc_parser = ParseDoc(SMOKE, TECH, GROUP)
+    def get_results(self):
+        prod_grp_pred = predict_baseline(self.common_naming)['prod_group']
+        doc_parser = ParseDoc(prod_grp_pred, TECH, GROUP, self.common_naming)
         return doc_parser.create_json()
 
 
@@ -43,6 +45,7 @@ class TwoActivity(models.Model):
     tech_req = models.TextField(max_length=10000)
     group_prod = models.TextField(max_length=10000)
 
-    def get_results():
-        doc_parser = ParseDoc(SMOKE, TECH, GROUP)
+    def get_results(self):
+        prod_grp_pred = predict_baseline(self.common_naming)['prod_group']
+        doc_parser = ParseDoc(prod_grp_pred, TECH, GROUP, self.common_naming)
         return doc_parser.create_json()

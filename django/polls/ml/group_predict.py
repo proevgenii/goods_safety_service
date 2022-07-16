@@ -1,6 +1,11 @@
+import os
 import re
 import pickle
 import nltk
+
+PATH = os.path.dirname(__file__)
+MODEL_PATH = os.path.join(PATH, "models", "baseline_model.pkl")
+DICT_PATH = os.path.join(PATH, "data", "group_dict.pkl")
 
 nltk.download("stopwords")
 from nltk.corpus import stopwords
@@ -32,10 +37,10 @@ def predict_baseline(name: str) -> dict:
 
     # TODO: fix this, not optimal in terms of speed
     # load model
-    with open("models/baseline_model.pkl", "rb") as f:
+    with open(MODEL_PATH, "rb") as f:
         clf = pickle.load(f)
     #TODO: fix this, not optimal in terms of speed
-    with open("data/group_dict.pkl", "rb") as f:
+    with open(DICT_PATH, "rb") as f:
         group_dct = pickle.load(f)
 
     # preprocess text

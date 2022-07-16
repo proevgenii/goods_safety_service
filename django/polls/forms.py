@@ -39,11 +39,11 @@ class MapOne(forms.Form):
         self.result = result
 
         self.fields["code"] = forms.CharField(
-            max_length=100, initial="Продукция" + self.result["Код"], disabled=True, required=True)
+            max_length=100, initial="Продукция " + self.result["Код"], disabled=True, required=True)
         self.fields["common_naming"] = forms.CharField(widget=forms.Textarea(
-        ), max_length=10000, initial=self.result["ТН ВЭД ЕАЭС"], disabled=True, required=True)
+        ), max_length=10000, initial=self.result["Общее наименование продукции"], disabled=True, required=True)
         self.fields["tn_ved"] = forms.CharField(widget=forms.Textarea(
-        ), max_length=10000, initial=self.result["Технические регламенты"], disabled=True, required=True)
+        ), max_length=10000, initial=self.result["ТН ВЭД ЕАЭС"], disabled=True, required=True)
         self.fields["tech_req"] = forms.CharField(widget=forms.Textarea(
         ), max_length=10000, initial=self.result["Технические регламенты"], disabled=True, required=True)
         self.fields["group_prod"] = forms.CharField(widget=forms.Textarea(
@@ -60,9 +60,9 @@ class MapTwo(forms.Form):
         self.fields["code"] = forms.CharField(
             max_length=100, initial="Продукция" + self.result["Код"], disabled=True, required=True)
         self.fields["common_naming"] = forms.CharField(widget=forms.Textarea(
-        ), max_length=10000, initial=self.result["ТН ВЭД ЕАЭС"], disabled=True, required=True)
+        ), max_length=10000, initial=self.result["Общее наименование продукции"], disabled=True, required=True)
         self.fields["tn_ved"] = forms.CharField(widget=forms.Textarea(
-        ), max_length=10000, initial=self.result["Технические регламенты"], disabled=True, required=True)
+        ), max_length=10000, initial=self.result["ТН ВЭД ЕАЭС"], disabled=True, required=True)
         self.fields["tech_req"] = forms.CharField(widget=forms.Textarea(
         ), max_length=10000, initial=self.result["Технические регламенты"], disabled=True, required=True)
         self.fields["group_prod"] = forms.CharField(widget=forms.Textarea(
