@@ -1,0 +1,156 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+    <title>Тест 1</title>
+    <style type="text/css">
+        .header {
+            height: 60px;
+            background-color: #F0F8FF;
+            padding: 20px;
+            text-align: center
+        }
+
+        .left_col {
+            width: 0%;
+            height: 460px;
+            background-color: #dddddd;
+            padding: 15px;
+            vertical-align: top
+        }
+
+        .center_col {
+            width: 100%;
+            background-color: #ffffff;
+            padding: 15px;
+            vertical-align: top
+        }
+
+        .right_col {
+            width: 0%;
+            background-color: #dddddd;
+            padding: 15px;
+            vertical-align: top
+        }
+
+        .footer {
+            padding: 10px 0 10px 20px;
+            background-color: #F0F8FF;
+            font-size: 13px
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        .i-am-centered {
+            margin: auto;
+            max-width: 300px;
+            padding-top: 2%;
+        }
+    </style>
+</head>
+
+<body>
+    <table cellpadding="0" cellspacing="0" width="100%" align="center">
+        <tr>
+            <td colspan="3" class="header">
+                <h1 align="center" style="color:Black">Тест 1</h1>
+            </td>
+        </tr>
+        <tr>
+            <td class="center_col">
+                <p align="center" id="date">" "</p>
+                <div class="i-am-centered">
+                    <form method="POST">{% csrf_token %}
+                        <script>
+                            let weekBgnDt = new Date();
+                            let weekEndDt = new Date();
+                            let wBeginDateLng, wEndDateLng, diffDays, dateCols = [];
+
+                            if (weekBgnDt.getDay() > 0) {
+                                diffDays = 0 - weekBgnDt.getDay();
+                                weekBgnDt.setDate(weekBgnDt.getDate() + diffDays)
+                            }
+                            weekEndDt = weekEndDt.setDate(weekBgnDt.getDate() + 7)
+
+                            wBeginDate = new Intl.DateTimeFormat('ru', {
+                                day: 'numeric', year: 'numeric',
+                                month: '2-digit'
+                            }).format(weekBgnDt);
+                            wEndDate = new Intl.DateTimeFormat('ru', {
+                                day: 'numeric', year: 'numeric', month:
+                                    '2-digit'
+                            }).format(weekEndDt);
+
+                            wBeginDateLng = new Intl.DateTimeFormat('ru', {
+                                day: 'numeric', year: 'numeric',
+                                month: 'long'
+                            }).format(weekBgnDt);
+                            wEndDateLng = new Intl.DateTimeFormat('ru', {
+                                day: 'numeric', year: 'numeric',
+                                month: 'long'
+                            }).format(weekEndDt);
+
+                            // console.log(wBeginDate, "-", wBeginDateLng)
+                            // console.log(wEndDate, "-", wEndDateLng)
+
+                            for (let i = weekBgnDt; i <= weekEndDt;) {
+                                dateCols.push(new Intl.DateTimeFormat('ru', {
+                                    day: 'numeric', year: 'numeric',
+                                    month: '2-digit'
+                                }).format(i));
+                                i = weekBgnDt.setDate(weekBgnDt.getDate() + 1)
+                            }
+
+
+                            // console.log({ wBeginDate, wBeginDateLng, wEndDate, wEndDateLng, dateCols })
+
+                            document.getElementById("date").innerHTML = "Текущая неделя: " + wBeginDateLng + " \u2013 " + wEndDateLng;
+                        </script>
+                        <div class="form-group">
+                            <label><b>Код</b></label>
+                            {{ form.code }}
+                            {{ form.code.errors }}
+                        </div>
+                        <div class="form-group">
+                            <label><b>Общее наименование продукции</b></label>
+                            {{ form.common_naming }}
+                            {{ form.common_naming.errors }}
+                        </div>
+                        <div class="form-group">
+                            <label><b>ТН ВЭД ЕАЭС</b></label>
+                            {{ form.tn_ved }}
+                            {{ form.tn_ved.errors }}
+                        </div>
+                </div>
+                <div class="i-am-centered">
+                    <div class="form-group">
+                        <label><b>Технические регламенты</b></label>
+                        {{ form.tech_req }}
+                        {{ form.tech_req.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label><b>Группа продукции</b></label>
+                        {{ form.group_prod }}
+                        {{ form.group_prod.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label><b>Наличие ошибки</b></label>
+                        {{ form.error }}
+                    </div>
+                    {% autoescape off %}
+                    {{ plot_div }}
+                    {% endautoescape %}
+                    <hr>
+                    <p align="center"><a href="../test_2">Тест 2</a></p>
+                </div>
+            </td>
+            </form>
+        </tr>
+        <tr>
+            <td colspan="3" class="footer">
+                RAW
+            </td>
+        </tr>
+    </table>
