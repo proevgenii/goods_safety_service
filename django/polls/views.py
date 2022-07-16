@@ -21,6 +21,7 @@ def test_1_view(request):
             report.tn_ved = form.cleaned_data["tn_ved"]
             report.tech_req = form.cleaned_data["tech_req"]
             report.group_prod = form.cleaned_data["group_prod"]
+            OneActivity.get_results()
             return render(request, 'map.html',
                           context={'plot_div': map_view()})
         elif form.is_valid() != True:
@@ -45,6 +46,7 @@ def test_2_view(request):
             report = TwoActivity()
             report.code = form.cleaned_data["code"]
             report.common_naming = form.cleaned_data["common_naming"]
+            TwoActivity.get_results()
             return render(request, 'map.html',
                           context={'plot_div': map_view()})
         elif form.is_valid() != True:
