@@ -13,10 +13,10 @@ class ParseDoc:
 
     def __init__(self, prod_grp_pred: str, path: str):
         self.prod_grp_pred = prod_grp_pred
-        self.data = pd.read_excel(path, sheet_name='data')
-        self.tn_search = pd.read_excel(path, sheet_name='тн вэд поиск')
+        self.data = pd.read_excel(path, sheet_name='data', engine = 'openpyxl')
+        self.tn_search = pd.read_excel(path, sheet_name='тн вэд поиск', engine = 'openpyxl')
         self.tn_search = self.tn_search.rename(columns={'Копия Группа продукции.1': 'Группа продукции'})
-        self.dataset = pd.read_excel(path, sheet_name='датасет')
+        self.dataset = pd.read_excel(path, sheet_name='датасет', engine = 'openpyxl')
         self.technical_regulation = self.get_technical_regulation(self.dataset)
         self.gruppa_and_tov_poz_tn_codes = self.get_gruppa_and_tov_poz_tn_codes(self.tn_search)
         self.sub_poz_code = self.map_sub_poz_code()
