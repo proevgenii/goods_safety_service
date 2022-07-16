@@ -4,7 +4,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
-	<title>Project activity</title>
+	<title>User activity</title>
 	<style type="text/css">
 		.header {
 			height: 60px;
@@ -55,7 +55,7 @@
 	<table cellpadding="0" cellspacing="0" width="100%" align="center">
 		<tr>
 			<td colspan="3" class="header">
-				<h1 align="center" style="color:Black">Project activity</h1>
+				<h1 align="center" style="color:Black"> User activity</h1>
 			</td>
 		</tr>
 		<tr>
@@ -63,22 +63,13 @@
 			<td class="left_col">
 				<h2>Tips</h2>
 				<ul>
-					<li>Project name:<br>
-						project_name <b>(only if not selected in previous point)</b></li>
-					<li>Last week achievements:<br>
-						[sentence_with_main_achievement_on_business_language]<br>
-					</li>
-					<li>Last project updates:<br>
-						[SEA-number-what_did_you_do]<br>
-					</li>
-					<li>Next week achievements:<br>
-						[sentence_with_main_goals_for_next_week_on_business_language]<br>
-					</li>
-					<li>Next project updates:<br>
-						[SEA-number-what_are_you_going_to_do]<br>
-					</li>
-					<li>Try to use business language</li>
-					<li><b>Put "[" and "]" as it's shown in tips and examples</b></li>
+				<li>Assigned projects:<br>
+					project_name</li>
+				<li>Achievements:<br>
+					[project_name1-sentence_with_your_achievements1]<br>
+					[project_name2-sentence_with_your_achievements2]<br></li>
+				<li>Try to use business language</li>
+				<li><b>Put "[" and "]" as it's shown in tips and examples</b></li>
 				</ul>
 			</td>
 			-->
@@ -129,68 +120,63 @@
 
 							// console.log({ wBeginDate, wBeginDateLng, wEndDate, wEndDateLng, dateCols })
 
-							document.getElementById("date").innerHTML = "Current week: " + wBeginDateLng + " \u2013 " + wEndDateLng;
+							document.getElementById("date").innerHTML ="Current week: " + wBeginDateLng + " \u2013 " + wEndDateLng;
 						</script>
 						<div class="form-group">
 							<label><b>Team member</b></label>
 							{{ form.team_member }}
 						</div>
 						<div class="form-group">
-							<label><b>Project</b></label>
-							{{ form.project }}
+							<label><b>Team</b></label>
+							{{ form.team }}
 						</div>
 						<div class="form-group">
-							<label><b>Project name</b></label>
-							{{ form.project_name }}
+							<label><b>Status</b></label>
+							{{ form.status }}
 						</div>
 						<div class="form-group">
-							<label><b>Last week achievements</b></label>
-							{{ form.last_week_achievements }}
-							{{ form.last_week_achievements.errors }}
+							<label><b>Team member backup</b></label>
+							{{ form.team_member_backup }}
 						</div>
-						<div class="form-group">
-							<label><b>Last project updates</b></label>
-							{{ form.last_project_updates }}
-							{{ form.last_project_updates.errors }}
-						</div>
-						<div class="form-group">
-							<label><b>Next week achievements</b></label>
-							{{ form.next_week_achievements }}
-							{{ form.next_week_achievements.errors }}
-						</div>
-						<div class="form-group">
-							<label><b>Next project updates</b></label>
-							{{ form.next_project_updates }}
-							{{ form.next_project_updates.errors }}
-						</div>
-						<button type="submit" class="btn btn-primary">Submit</button>
-						<hr>
-						<!-- <p align="center"><a href="../user">User activity</a></p> -->
+				</div>
+				<div class="i-am-centered">
+					<div class="form-group">
+						<label><b>Assigned projects</b></label>
+						{{ form.assigned_projects }}
+						{{ form.assigned_projects.errors }}
+					</div>
+					<div class="form-group">
+						<label><b>Achievements</b></label>
+						{{ form.achievements }}
+						{{ form.achievements.errors }}
+					</div>
+					<div class="form-group">
+						<label><b>Project end date</b></label>
+						{{ form.project_end_date }}
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+					<hr>
+					<!-- <p align="center"><a href="../project">Project activity</a></p> -->
 				</div>
 			</td>
 			<!--
 			<td class="right_col">
 				<h2>Examples</h2>
 				<div class="form-group">
-					<p><b>Last week achievements</b><br />
-						<span style="white-space: pre-line">{{form.last_week_achievements.help_text}}</span>
+					<p><b>Assigned projects</b><br />
+						<span style="white-space: pre-line">{{form.assigned_projects.help_text}}</span>
 					</p>
-					<p><b>Last project updates</b><br />
-						<span style="white-space: pre-line">{{form.last_project_updates.help_text}}</span>
-					</p>
-					<p><b>Next week achievements</b><br />
-						<span style="white-space: pre-line">{{form.next_week_achievements.help_text}}</span>
-					</p>
-					<p><b>Next project updates</b><br />
-						<span style="white-space: pre-line">{{form.next_project_updates.help_text}}</span>
+					<p><b>Achievements</b><br />
+						<span style="white-space: pre-line">{{form.achievements.help_text}}</span>
 					</p>
 				</div>
-				
 			</td>
 			-->
 			</form>
 		</tr>
 		<tr>
-			<td colspan="3" class="footer">WRAutomation</td>
+			<td colspan="3" class="footer">
+				WRAutomation
+			</td>
 		</tr>
 	</table>
