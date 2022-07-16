@@ -21,7 +21,7 @@ def test_1_view(request):
             report.tn_ved = form.cleaned_data["tn_ved"]
             report.tech_req = form.cleaned_data["tech_req"]
             report.group_prod = form.cleaned_data["group_prod"]
-            map_one=MapOne(report.get_results())
+            map_one=MapOne(report.get_results(), form.cleaned_data)
             return render(request, 'map_1.html',
                           context={'form': map_one,'plot_div': map_view()})
         elif form.is_valid() != True:

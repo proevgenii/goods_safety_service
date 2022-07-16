@@ -35,7 +35,26 @@ class OneActivity(models.Model):
     def get_results(self):
         prod_grp_pred = predict_baseline(self.common_naming)['prod_group']
         doc_parser = ParseDoc(prod_grp_pred, TECH, GROUP, self.common_naming)
-        return doc_parser.create_json()
+        result = doc_parser.create_json()
+
+        if self.tn_ved != result["ТН ВЭД ЕАЭС"]:
+            result["Наличие ошибки"] = 11
+        if self.tech_req != result["Технические регламенты"] and result["Технические регламенты"] != "not_found":
+            result["Наличие ошибки"] = 12
+        if self.group_prod != result["Группа продукции"]:
+            result["Наличие ошибки"] = 13
+
+        if self.tn_ved != result["ТН ВЭД ЕАЭС"] and self.tech_req != result["Технические регламенты"] and result["Технические регламенты"] != "not_found":
+            result["Наличие ошибки"] = 14
+        if self.tn_ved != result["ТН ВЭД ЕАЭС"] and self.group_prod != result["Группа продукции"]:
+            result["Наличие ошибки"] = 15
+        if self.tech_req != result["Технические регламенты"] and result["Технические регламенты"] != "not_found" and self.group_prod != result["Группа продукции"]:
+            result["Наличие ошибки"] = 16
+
+        if self.tn_ved != result["ТН ВЭД ЕАЭС"] and self.tech_req != result["Технические регламенты"] and result["Технические регламенты"] != "not_found" and self.group_prod != result["Группа продукции"]:
+            result["Наличие ошибки"] = 17
+
+        return result
 
 
 class TwoActivity(models.Model):
