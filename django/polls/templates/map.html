@@ -1,12 +1,15 @@
 <html>
 
 <head>
-    <h1>Your activity of the week has been saved</h1>
+    <h1>Результаты</h1>
 </head>
 
 <body>
-    <p><a href="../user">Get back to user activity</a></p>
-    <p><a href="../project">Get back to project activity</a></p>
+    {% autoescape off %}
+    {{ plot_div }}
+    {% endautoescape %}
+    <p><a href="../test_1">Тест 1</a></p>
+    <p><a href="../test_2">Тест 2</a></p>
 </body>
 
 </html>
