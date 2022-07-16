@@ -2,6 +2,9 @@
 
 ## Сервис карты рынка безопасных товаров
 
+Docker image
+[DockerHub](https://hub.docker.com/r/altairzero/goods_safety_service)
+
 Все операции производятся из каталога "django".
 
 Сборка сервиса:
