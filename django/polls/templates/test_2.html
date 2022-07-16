@@ -1,0 +1,182 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+	<title>User activity</title>
+	<style type="text/css">
+		.header {
+			height: 60px;
+			background-color: #F0F8FF;
+			padding: 20px;
+			text-align: center
+		}
+
+		.left_col {
+			width: 0%;
+			height: 460px;
+			background-color: #dddddd;
+			padding: 15px;
+			vertical-align: top
+		}
+
+		.center_col {
+			width: 100%;
+			background-color: #ffffff;
+			padding: 15px;
+			vertical-align: top
+		}
+
+		.right_col {
+			width: 0%;
+			background-color: #dddddd;
+			padding: 15px;
+			vertical-align: top
+		}
+
+		.footer {
+			padding: 10px 0 10px 20px;
+			background-color: #F0F8FF;
+			font-size: 13px
+		}
+	</style>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<style>
+		.i-am-centered {
+			margin: auto;
+			max-width: 300px;
+			padding-top: 2%;
+		}
+	</style>
+</head>
+
+<body>
+	<table cellpadding="0" cellspacing="0" width="100%" align="center">
+		<tr>
+			<td colspan="3" class="header">
+				<h1 align="center" style="color:Black"> User activity</h1>
+			</td>
+		</tr>
+		<tr>
+			<!--
+			<td class="left_col">
+				<h2>Tips</h2>
+				<ul>
+				<li>Assigned projects:<br>
+					project_name</li>
+				<li>Achievements:<br>
+					[project_name1-sentence_with_your_achievements1]<br>
+					[project_name2-sentence_with_your_achievements2]<br></li>
+				<li>Try to use business language</li>
+				<li><b>Put "[" and "]" as it's shown in tips and examples</b></li>
+				</ul>
+			</td>
+			-->
+			<td class="center_col">
+				<p align="center" id="date">" "</p>
+				<div class="i-am-centered">
+					<form method="POST">{% csrf_token %}
+						<script>
+							let weekBgnDt = new Date();
+							let weekEndDt = new Date();
+							let wBeginDateLng, wEndDateLng, diffDays, dateCols = [];
+
+							if (weekBgnDt.getDay() > 0) {
+								diffDays = 0 - weekBgnDt.getDay();
+								weekBgnDt.setDate(weekBgnDt.getDate() + diffDays)
+							}
+							weekEndDt = weekEndDt.setDate(weekBgnDt.getDate() + 7)
+
+							wBeginDate = new Intl.DateTimeFormat('en-GB', {
+								day: 'numeric', year: 'numeric',
+								month: '2-digit'
+							}).format(weekBgnDt);
+							wEndDate = new Intl.DateTimeFormat('en-GB', {
+								day: 'numeric', year: 'numeric', month:
+									'2-digit'
+							}).format(weekEndDt);
+
+							wBeginDateLng = new Intl.DateTimeFormat('en-GB', {
+								day: 'numeric', year: 'numeric',
+								month: 'long'
+							}).format(weekBgnDt);
+							wEndDateLng = new Intl.DateTimeFormat('en-GB', {
+								day: 'numeric', year: 'numeric',
+								month: 'long'
+							}).format(weekEndDt);
+
+							// console.log(wBeginDate, "-", wBeginDateLng)
+							// console.log(wEndDate, "-", wEndDateLng)
+
+							for (let i = weekBgnDt; i <= weekEndDt;) {
+								dateCols.push(new Intl.DateTimeFormat('en-GB', {
+									day: 'numeric', year: 'numeric',
+									month: '2-digit'
+								}).format(i));
+								i = weekBgnDt.setDate(weekBgnDt.getDate() + 1)
+							}
+
+
+							// console.log({ wBeginDate, wBeginDateLng, wEndDate, wEndDateLng, dateCols })
+
+							document.getElementById("date").innerHTML ="Current week: " + wBeginDateLng + " \u2013 " + wEndDateLng;
+						</script>
+						<div class="form-group">
+							<label><b>Team member</b></label>
+							{{ form.team_member }}
+						</div>
+						<div class="form-group">
+							<label><b>Team</b></label>
+							{{ form.team }}
+						</div>
+						<div class="form-group">
+							<label><b>Status</b></label>
+							{{ form.status }}
+						</div>
+						<div class="form-group">
+							<label><b>Team member backup</b></label>
+							{{ form.team_member_backup }}
+						</div>
+				</div>
+				<div class="i-am-centered">
+					<div class="form-group">
+						<label><b>Assigned projects</b></label>
+						{{ form.assigned_projects }}
+						{{ form.assigned_projects.errors }}
+					</div>
+					<div class="form-group">
+						<label><b>Achievements</b></label>
+						{{ form.achievements }}
+						{{ form.achievements.errors }}
+					</div>
+					<div class="form-group">
+						<label><b>Project end date</b></label>
+						{{ form.project_end_date }}
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+					<hr>
+					<!-- <p align="center"><a href="../project">Project activity</a></p> -->
+				</div>
+			</td>
+			<!--
+			<td class="right_col">
+				<h2>Examples</h2>
+				<div class="form-group">
+					<p><b>Assigned projects</b><br />
+						<span style="white-space: pre-line">{{form.assigned_projects.help_text}}</span>
+					</p>
+					<p><b>Achievements</b><br />
+						<span style="white-space: pre-line">{{form.achievements.help_text}}</span>
+					</p>
+				</div>
+			</td>
+			-->
+			</form>
+		</tr>
+		<tr>
+			<td colspan="3" class="footer">
+				WRAutomation
+			</td>
+		</tr>
+	</table>
