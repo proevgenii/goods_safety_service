@@ -61,8 +61,7 @@ class ParseDoc:
                 'Группа продукции': self.prod_grp_pred,
                 'Наличие ошибки': 0
                 }
-        json_file = json.dump(file, indent=4)
-        return json_file
+        return file
 
 
 if __name__ == 'main':
