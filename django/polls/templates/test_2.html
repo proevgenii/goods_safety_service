@@ -4,7 +4,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
-	<title>Project activity</title>
+	<title>Тест 2</title>
 	<style type="text/css">
 		.header {
 			height: 60px;
@@ -55,33 +55,10 @@
 	<table cellpadding="0" cellspacing="0" width="100%" align="center">
 		<tr>
 			<td colspan="3" class="header">
-				<h1 align="center" style="color:Black">Project activity</h1>
+				<h1 align="center" style="color:Black">Тест 2</h1>
 			</td>
 		</tr>
 		<tr>
-			<!--
-			<td class="left_col">
-				<h2>Tips</h2>
-				<ul>
-					<li>Project name:<br>
-						project_name <b>(only if not selected in previous point)</b></li>
-					<li>Last week achievements:<br>
-						[sentence_with_main_achievement_on_business_language]<br>
-					</li>
-					<li>Last project updates:<br>
-						[SEA-number-what_did_you_do]<br>
-					</li>
-					<li>Next week achievements:<br>
-						[sentence_with_main_goals_for_next_week_on_business_language]<br>
-					</li>
-					<li>Next project updates:<br>
-						[SEA-number-what_are_you_going_to_do]<br>
-					</li>
-					<li>Try to use business language</li>
-					<li><b>Put "[" and "]" as it's shown in tips and examples</b></li>
-				</ul>
-			</td>
-			-->
 			<td class="center_col">
 				<p align="center" id="date">" "</p>
 				<div class="i-am-centered">
@@ -97,20 +74,20 @@
 							}
 							weekEndDt = weekEndDt.setDate(weekBgnDt.getDate() + 7)
 
-							wBeginDate = new Intl.DateTimeFormat('en-GB', {
+							wBeginDate = new Intl.DateTimeFormat('ru', {
 								day: 'numeric', year: 'numeric',
 								month: '2-digit'
 							}).format(weekBgnDt);
-							wEndDate = new Intl.DateTimeFormat('en-GB', {
+							wEndDate = new Intl.DateTimeFormat('ru', {
 								day: 'numeric', year: 'numeric', month:
 									'2-digit'
 							}).format(weekEndDt);
 
-							wBeginDateLng = new Intl.DateTimeFormat('en-GB', {
+							wBeginDateLng = new Intl.DateTimeFormat('ru', {
 								day: 'numeric', year: 'numeric',
 								month: 'long'
 							}).format(weekBgnDt);
-							wEndDateLng = new Intl.DateTimeFormat('en-GB', {
+							wEndDateLng = new Intl.DateTimeFormat('ru', {
 								day: 'numeric', year: 'numeric',
 								month: 'long'
 							}).format(weekEndDt);
@@ -119,7 +96,7 @@
 							// console.log(wEndDate, "-", wEndDateLng)
 
 							for (let i = weekBgnDt; i <= weekEndDt;) {
-								dateCols.push(new Intl.DateTimeFormat('en-GB', {
+								dateCols.push(new Intl.DateTimeFormat('ru', {
 									day: 'numeric', year: 'numeric',
 									month: '2-digit'
 								}).format(i));
@@ -129,68 +106,45 @@
 
 							// console.log({ wBeginDate, wBeginDateLng, wEndDate, wEndDateLng, dateCols })
 
-							document.getElementById("date").innerHTML = "Current week: " + wBeginDateLng + " \u2013 " + wEndDateLng;
+							document.getElementById("date").innerHTML = "Текущая неделя: " + wBeginDateLng + " \u2013 " + wEndDateLng;
 						</script>
 						<div class="form-group">
-							<label><b>Team member</b></label>
-							{{ form.team_member }}
+							<label><b>Код</b></label>
+							{{ form.code }}
+                            {{ form.code.errors }}
 						</div>
 						<div class="form-group">
-							<label><b>Project</b></label>
-							{{ form.project }}
+							<label><b>Общее наименование продукции</b></label>
+							{{ form.common_naming }}
+                            {{ form.common_naming.errors }}
 						</div>
 						<div class="form-group">
-							<label><b>Project name</b></label>
-							{{ form.project_name }}
+							<label><b>ТН ВЭД ЕАЭС</b></label>
+							{{ form.tn_ved }}
+                            {{ form.tn_ved.errors }}
 						</div>
-						<div class="form-group">
-							<label><b>Last week achievements</b></label>
-							{{ form.last_week_achievements }}
-							{{ form.last_week_achievements.errors }}
-						</div>
-						<div class="form-group">
-							<label><b>Last project updates</b></label>
-							{{ form.last_project_updates }}
-							{{ form.last_project_updates.errors }}
-						</div>
-						<div class="form-group">
-							<label><b>Next week achievements</b></label>
-							{{ form.next_week_achievements }}
-							{{ form.next_week_achievements.errors }}
-						</div>
-						<div class="form-group">
-							<label><b>Next project updates</b></label>
-							{{ form.next_project_updates }}
-							{{ form.next_project_updates.errors }}
-						</div>
-						<button type="submit" class="btn btn-primary">Submit</button>
-						<hr>
-						<!-- <p align="center"><a href="../user">User activity</a></p> -->
+				</div>
+				<div class="i-am-centered">
+					<div class="form-group">
+						<label><b>Технические регламенты</b></label>
+						{{ form.tech_req }}
+						{{ form.tech_req.errors }}
+					</div>
+					<div class="form-group">
+						<label><b>Группа продукции</b></label>
+						{{ form.group_prod }}
+						{{ form.group_prod.errors }}
+					</div>
+					<button type="submit" class="btn btn-primary">Проверить</button>
+					<hr>
+					<p align="center"><a href="../test_1">Тест 1</a></p>
 				</div>
 			</td>
-			<!--
-			<td class="right_col">
-				<h2>Examples</h2>
-				<div class="form-group">
-					<p><b>Last week achievements</b><br />
-						<span style="white-space: pre-line">{{form.last_week_achievements.help_text}}</span>
-					</p>
-					<p><b>Last project updates</b><br />
-						<span style="white-space: pre-line">{{form.last_project_updates.help_text}}</span>
-					</p>
-					<p><b>Next week achievements</b><br />
-						<span style="white-space: pre-line">{{form.next_week_achievements.help_text}}</span>
-					</p>
-					<p><b>Next project updates</b><br />
-						<span style="white-space: pre-line">{{form.next_project_updates.help_text}}</span>
-					</p>
-				</div>
-				
-			</td>
-			-->
 			</form>
 		</tr>
 		<tr>
-			<td colspan="3" class="footer">WRAutomation</td>
+			<td colspan="3" class="footer">
+				RAW
+			</td>
 		</tr>
 	</table>
