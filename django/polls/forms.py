@@ -38,7 +38,6 @@ class MapOne(forms.Form):
         super().__init__(*args, **kwargs)
         self.result = result
         self.user_data = user_data
-        print(self.user_data)
         self.label_1, self.label_2, self.label_3 = "Ошибок нет", "Ошибок нет", "Ошибок нет"
         if self.result["Наличие ошибки"] == 11:
             self.label_1 = f'Неверно введённый ТН ВЭД ЕАЭС: {self.user_data["tn_ved"]}'
