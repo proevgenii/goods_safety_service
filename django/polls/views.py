@@ -85,9 +85,10 @@ def test_2_view(request):
             report = TwoActivity()
             report.code = form.cleaned_data["code"]
             report.common_naming = form.cleaned_data["common_naming"]
-            map_two = MapTwo(report.get_results())
+            result = report.get_results()
+            map_two = MapTwo(result)
             return render(request, 'map_2.html',
-                          context={'form': map_two, 'plot_div': map_view()})
+                          context={'form': map_two, 'plot_div': map_view(result["ТН ВЭД ЕАЭС"])})
         elif form.is_valid() != True:
             sys.stdout.write(json.dumps(form.errors, indent=4))
     else:
